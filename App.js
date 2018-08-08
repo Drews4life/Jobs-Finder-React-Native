@@ -27,6 +27,11 @@ const WelcomeScreenNav = createBottomTabNavigator({
       }
     })
   }
+}, { 
+  navigationOptions: {
+    tabBarVisible: false
+  },
+  lazyLoad: true
 });
 
 
