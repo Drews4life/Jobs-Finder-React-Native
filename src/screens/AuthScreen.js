@@ -3,20 +3,20 @@ import { View, Text, StyleSheet, AsyncStorage, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 import {tryLoginFacebook, resetErrorFacebook} from '../actions';
-//import {FACEBOOK_AUTH_TOKEN} from '../actions/types';
+import {FACEBOOK_AUTH_TOKEN} from '../actions/types';
 
 class AuthScreen extends Component {
   componentDidMount() {
     this.props.tryLoginFB();
-    //AsyncStorage.removeItem(FACEBOOK_AUTH_TOKEN);
-    this.onAuthComplete(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('props received');
     this.onAuthComplete(nextProps);
   }
 
   onAuthComplete = (props) => {
+ 
     const {navigate} = this.props.navigation;
     if(props.token) {
       navigate('map');

@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { Facebook } from 'expo';
+import { NavigationActions } from 'react-navigation';
 
 import {
     FACEBOOK_LOGIN_SUCCESS,
@@ -13,6 +14,8 @@ export const tryLoginFacebook = () => async dispatch => {
     if (token) {
         // console.log('ASYNC STORAGE TOKEN: ', token);
         dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+        NavigationActions.navigate({routeName: 'map'});
+        console.log('first console navigated');
     } else {
         tryFacebookLogin(dispatch);
     }
@@ -36,5 +39,7 @@ const tryFacebookLogin = async dispatch => {
 
     await AsyncStorage.setItem(FACEBOOK_AUTH_TOKEN, token);
     // console.log("ACTION TOKEN: ", token);
-    dispatch({type: FACEBOOK_LOGIN_SUCCESS, type: token});
+    return dispatch({type: FACEBOOK_LOGIN_SUCCESS, payload: token});
+    // NavigationActions.navigate({routeName: 'map'});
+    // console.log('second console navigated');
 };
